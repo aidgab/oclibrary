@@ -8,18 +8,25 @@
 
 class ActionProvider {
     public function actionIndex(){
-        $books=null;
+        $books=array(
+            'bytitle'=>null,
+            'byauthor'=>null,
+            'bygenres'=>null
+        );
         if (isset($_GET['find'])){
             $findStr=trim($_GET['find']);
             if (!$findStr){
-                $books=array();
+                $books=array('bytitle'=>array(),'byauthor'=>array(),'bygenres'=>array());
             }
             else{
-                $books=Db::getInstance()->queryArray('SELECT * FROM book WHERE title LIKE :t', array(':t'=>'%'.$_GET['find'].'%'));
+                $books['bytitle']=Db::getInstance()->queryArray('SELECT * FROM book WHERE title LIKE :t', array(':t'=>'%'.$_GET['find'].'%'));
+                $books['byauthor']=Db::getInstance()->queryArray('SELECT b.* FROM authors a
+                        WHERE (firstname LIKE :t) OR (lastname LIKE :t) OR (middlename LIKE %t) JOIN book b ON (b.id=a.idbook) LIKE :t', array(':t'=>'%'.$_GET['find'].'%'));
             }
         }
         ViewEngine::render('index', array(
-            'books'=>$books
+            'books'=>$books,
+            'findStr'=>$findStr
         ));
     }
 
