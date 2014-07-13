@@ -10,7 +10,7 @@ $headers=array(
         <h1>Поиск книг</h1>
         <form role="form" method="get">
             <div class="form-group">
-                <input type="text" class="form-control" name="find" id="mainSearchField" placeholder="Например: Ромео и Джульетта" value="<?=ViewEngine::encodeChars($findStr); ?>">
+                <input type="text" class="form-control" name="find" id="mainSearchField" placeholder="Например: Мастер и маргарита" value="<?=ViewEngine::encodeChars($findStr); ?>">
             </div>
             <button type="submit" class="btn btn-default">Искать</button>
         </form>
@@ -35,10 +35,12 @@ $headers=array(
             echo '<ul>';
             foreach($bookType as $book){
                 ?>
-                <li><? echo ViewEngine::link(ViewEngine::encodeChars($book['title']), 'viewbook', array('id'=>$book['id']));?></li>
+                <li><? echo ViewEngine::link(ViewEngine::encodeChars($book['title']), 'viewbook', array('id'=>$book['id']));?> — <?=ViewEngine::encodeChars($book['lastname'].' '.$book['firstname']); ?>
+                </li>
             <?php
             }
             echo '</ul>';
+            echo '<hr />';
         }
     }
     ?>

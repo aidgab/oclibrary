@@ -8,6 +8,7 @@
 
 class ActionProvider {
     public function actionIndex(){
+        $findStr='';
         $books=array(
             'bytitle'=>null,
             'byauthor'=>null,
@@ -19,9 +20,9 @@ class ActionProvider {
                 $books=array('bytitle'=>array(),'byauthor'=>array(),'bygenres'=>array());
             }
             else{
-                $books['bytitle']=Db::getInstance()->queryArray('SELECT * FROM book WHERE title LIKE :t', array(':t'=>'%'.$_GET['find'].'%'));
-                $books['byauthor']=Db::getInstance()->queryArray('SELECT b.* FROM authors a
-                        WHERE (firstname LIKE :t) OR (lastname LIKE :t) OR (middlename LIKE %t) JOIN book b ON (b.id=a.idbook) LIKE :t', array(':t'=>'%'.$_GET['find'].'%'));
+                $books['bytitle']=Db::getInstance()->queryArray('SELECT b.*, a.firstname, a.lastname FROM book b LEFT JOIN autors a ON (b.id=a.idbook) WHERE title LIKE :t', array(':t'=>'%'.$findStr.'%'));
+                $books['byauthor']=Db::getInstance()->queryArray('SELECT b.*, a.firstname, a.lastname FROM autors a
+                        JOIN book b ON (b.id=a.idbook) WHERE (a.firstname LIKE :t) OR (a.lastname LIKE :t) OR (a.middlename LIKE :t)', array(':t'=>'%'.$findStr.'%'));
             }
         }
         ViewEngine::render('index', array(
