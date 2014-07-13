@@ -46,4 +46,25 @@ class ActionProvider {
     public function actionAbout (){
         ViewEngine::render('about');
     }
+
+    public function actionViewbook(){
+        if (!isset($_GET['id'])){
+            die('Недостаточно параметров');
+        }
+        $id=intval($_GET['id']);
+        $book=Db::getInstance()->queryArray('SELECT b.*, a.firstname, a.lastname, g.title as "genretitle" FROM autors a
+                        JOIN book b ON (b.id=a.idbook)
+                        JOIN genreitems gi ON (gi.idbook=b.id)
+                        JOIN genre g ON (g.id=gi.idgenre)
+                        WHERE b.id=:id', array(':id'=>$id));
+        if (count($book)<=0){
+            die('404. Не найден объект');
+        }
+        else{
+            $book=$book[0];
+        }
+        ViewEngine::render('view', array(
+            'book'=>$book,
+        ));
+    }
 } 

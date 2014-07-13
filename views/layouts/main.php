@@ -31,11 +31,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Библиотека.Поиск</a>
+                <a class="navbar-brand" href="index.php?route=index">Библиотека.Поиск</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="index.php?route=index">Поиск</a></li>
+                    <li><a href="index.php?route=index">Поиск</a></li>
                     <li><a href="index.php?route=about">О системе</a></li>
                 </ul>
             </div><!--/.navbar-collapse -->
