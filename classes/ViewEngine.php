@@ -39,4 +39,15 @@ class ViewEngine {
         }
         return '<a href="'.$href.'">'.$text.'</a>';
     }
+
+    /**
+     * Проверяем, запрошен ли код из xmlhttprequest
+     * @return bool
+     */
+    public static function isAjaxRequest(){
+        if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            return true;
+        }
+        return false;
+    }
 }

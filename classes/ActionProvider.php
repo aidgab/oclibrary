@@ -31,10 +31,16 @@ class ActionProvider {
                         WHERE (g.title LIKE :t)', array(':t'=>'%'.$findStr.'%'));
             }
         }
-        ViewEngine::render('index', array(
-            'books'=>$books,
-            'findStr'=>$findStr
-        ));
+        if (ViewEngine::isAjaxRequest()) {
+            header('Content-Type: application/json');
+            echo json_encode($books);
+        }
+        else{
+            ViewEngine::render('index', array(
+                'books'=>$books,
+                'findStr'=>$findStr
+            ));
+        }
     }
 
     public function actionAbout (){

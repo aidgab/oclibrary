@@ -5,6 +5,7 @@ $headers=array(
     'bygenre'=>'Книги с таким жанром'
 );
 ?>
+<script src="js/index.js"></script>
 <div class="jumbotron">
     <div class="container">
         <h1>Поиск книг</h1>
@@ -36,7 +37,7 @@ $headers=array(
             foreach($bookType as $book){
                 ?>
                 <li>
-                    <? echo ViewEngine::link(ViewEngine::encodeChars($book['title']), 'viewbook', array('id'=>$book['id']));?> — <?=ViewEngine::encodeChars($book['lastname'].' '.$book['firstname']);
+                    <? echo ViewEngine::link(ViewEngine::encodeChars($book['title']), 'viewbook', array('id'=>$book['id']));?> — <?=ViewEngine::encodeChars($book['firstname'].' '.$book['lastname']);
                     if ($k=='bygenre'){
                         echo ' (<b><i>'.ViewEngine::encodeChars($book['genretitle']).'</i></b>)';
                     }

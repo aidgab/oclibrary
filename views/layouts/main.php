@@ -10,7 +10,14 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="js/jqueryui/jquery-ui.min.css" rel="stylesheet">
+    <link href="js/jqueryui/jquery-ui.structure.min.css" rel="stylesheet">
+    <link href="js/jqueryui/jquery-ui.theme.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/jqueryui/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
 </head>
 
@@ -36,10 +43,5 @@
     </div>
 
     <? echo $content; ?>
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
