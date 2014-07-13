@@ -23,6 +23,12 @@ class ActionProvider {
                 $books['bytitle']=Db::getInstance()->queryArray('SELECT b.*, a.firstname, a.lastname FROM book b LEFT JOIN autors a ON (b.id=a.idbook) WHERE title LIKE :t', array(':t'=>'%'.$findStr.'%'));
                 $books['byauthor']=Db::getInstance()->queryArray('SELECT b.*, a.firstname, a.lastname FROM autors a
                         JOIN book b ON (b.id=a.idbook) WHERE (a.firstname LIKE :t) OR (a.lastname LIKE :t) OR (a.middlename LIKE :t)', array(':t'=>'%'.$findStr.'%'));
+
+                $books['bygenre']=Db::getInstance()->queryArray('SELECT b.*, a.firstname, a.lastname, g.title as "genretitle" FROM autors a
+                        JOIN book b ON (b.id=a.idbook)
+                        JOIN genreitems gi ON (gi.idbook=b.id)
+                        JOIN genre g ON (g.id=gi.idgenre)
+                        WHERE (g.title LIKE :t)', array(':t'=>'%'.$findStr.'%'));
             }
         }
         ViewEngine::render('index', array(

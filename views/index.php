@@ -2,7 +2,7 @@
 $headers=array(
     'bytitle'=>'Книги с таким названием',
     'byauthor'=>'Книги с таким автором',
-    'bygenres'=>'Книги с таким жанромы'
+    'bygenre'=>'Книги с таким жанром'
 );
 ?>
 <div class="jumbotron">
@@ -35,7 +35,12 @@ $headers=array(
             echo '<ul>';
             foreach($bookType as $book){
                 ?>
-                <li><? echo ViewEngine::link(ViewEngine::encodeChars($book['title']), 'viewbook', array('id'=>$book['id']));?> — <?=ViewEngine::encodeChars($book['lastname'].' '.$book['firstname']); ?>
+                <li>
+                    <? echo ViewEngine::link(ViewEngine::encodeChars($book['title']), 'viewbook', array('id'=>$book['id']));?> — <?=ViewEngine::encodeChars($book['lastname'].' '.$book['firstname']);
+                    if ($k=='bygenre'){
+                        echo ' (<b><i>'.ViewEngine::encodeChars($book['genretitle']).'</i></b>)';
+                    }
+                    ?>
                 </li>
             <?php
             }
